@@ -28,6 +28,7 @@
 // namespace CSharpBasicsAssignment; // This line ending with a semicolon replaces the one with curly braces, preventing the entire file contents from being intended.
 
 using System.Reflection.Metadata;
+using CSharpBasicsAssignment;
 
 Console.WriteLine("=== PART A: Project & Structure ===");
 Console.WriteLine("Setup initial project structure & added comments");
@@ -109,3 +110,58 @@ static void RunTypesDemo() {
   // decimal invalidConversion = 50.70f;
   decimal validConversion = (decimal) 50.70f; // Since these types store number in different ways (IEEE 754 and base 10 respectively), the compiler refuses to implicitly risk losing precision
 }
+
+
+Console.WriteLine("\n=== PART C: Value vs. Reference Types ===");
+
+RunValueVsReference();
+
+static void RunValueVsReference() {
+  Point p1 = new Point {X = 1, Y = 2};
+  Point p2 = p1;
+  p2.X = 99;
+  Console.WriteLine($"Point 1's x value: {p1.X}");
+  Console.WriteLine($"Point 2's x value: {p2.X}");
+  /*
+    because struct is a value type, assigning p2 = p1 copies the entire value onto the stack.
+    They are completely different buckets of memory now.
+  */
+
+  Console.WriteLine("");
+  Order o1 = new Order {
+    OrderID = 123,
+    CustomerName = "Marwan",
+    Quantity = 3,
+    UnitPrice = 50,
+    IsPaid = false,
+    DiscountPercent = 20,
+    ShippingCity = "Aswan",
+    Priority = 'H',
+    ItemCode = 123456
+  };
+  o1.CalculateTotal();
+  Order o2 = o1;
+  o2.IsPaid = true;
+  Console.WriteLine($"Order 1 Paid Value: {o1.IsPaid}");
+  Console.WriteLine($"Order 2 Paid Value: {o2.IsPaid}");
+  /*
+    because order is a reference type, assigning o2 = o1 stores the reference (address) of o1 inside o2 
+    making it point to the same block of memory
+  */
+
+  object boxedOrder = o1; // no boxing happens here because Order is already a reference type so the only address gets copied
+  Order o3 = (Order) boxedOrder;
+  Console.WriteLine($"\nAre Instances o1 and o3 equal references: {object.ReferenceEquals(o1, o3)}");
+  Console.WriteLine("\nO2 Instance Summary:-");
+  o2.PrintSummary();
+
+  /*
+    Value type data such as (int, double, bool, char, struct, enum) live on the stack 
+    whereas Reference type data such as (class, interface) live on the heap (but a reference still exists on the stack).
+    When assigning value type data, data gets copied into a new block of memory on the stack. On the other hand, when 
+    assigning reference type data, a reference of the data gets stored in the other already existing object on the stack,
+    meaning no new object is created.
+  */
+}
+
+struct Point { public int X; public int Y; }
