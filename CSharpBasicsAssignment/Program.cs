@@ -29,6 +29,7 @@
 
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
+using System.Security.Principal;
 using CSharpBasicsAssignment;
 
 Console.WriteLine("=== PART A: Project & Structure ===");
@@ -208,6 +209,30 @@ void RunBitWiseOperators()
 }
 Console.WriteLine("\n=== PART E: Stack vs Heap Digram ===");
 Console.WriteLine("Created STACK_HEAP.md file");
+
+
+Console.WriteLine("\n=== PART F: Leet Code Problem ===");
+
+int[] nums1 = [4, 1, 2, 1, 2];
+int[] nums2 = [6, 7, 11, 7, 6];
+
+Console.WriteLine(FindSingleNumber(nums1));
+Console.WriteLine(FindSingleNumber(nums2));
+
+int FindSingleNumber(int[] nums)
+{
+  int singleNumber = 0;
+  for(int i = 0 ; i < nums.Length ; i++)
+  {
+    singleNumber ^= nums[i];
+  }
+  return singleNumber;
+  /*
+    When XORing two identical numbers, they cancel each other out to 0.
+    When XORing any number with 0, it just returns the number.
+    and because the order of XOR operations doesn't matter, all the pairs in the array cancel each other leaving a 0 at the end to be XOR'd with the unique number
+  */
+}
 
 struct Point { public int X; public int Y; } // used in part c
 
