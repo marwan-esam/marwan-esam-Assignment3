@@ -28,6 +28,7 @@
 // namespace CSharpBasicsAssignment; // This line ending with a semicolon replaces the one with curly braces, preventing the entire file contents from being intended.
 
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using CSharpBasicsAssignment;
 
 Console.WriteLine("=== PART A: Project & Structure ===");
@@ -163,5 +164,78 @@ static void RunValueVsReference() {
     meaning no new object is created.
   */
 }
+Console.WriteLine("\n=== PART D: Scope & Operators ===");
 
-struct Point { public int X; public int Y; }
+ScopeDemo demo = new ScopeDemo();
+
+demo.MethodA();
+demo.MethodB();
+demo.MethodC();
+demo.MethodD(); 
+
+Console.WriteLine("");
+RunCompositeOperators();
+
+void RunCompositeOperators()
+{
+  int total = 100;
+  total += 10; // total = total + 10;
+  Console.WriteLine(total);
+  total -= 15; // total = total - 15;
+  Console.WriteLine(total);
+  total *= 31; // total = total * 31;
+  Console.WriteLine(total);
+  total /= 4; // total = total / 4;
+  Console.WriteLine(total);
+  total %= 17; // total = total % 17;
+  Console.WriteLine(total);
+
+}
+
+Console.WriteLine("");
+RunBitWiseOperators();
+
+void RunBitWiseOperators()
+{
+  int a = 12;
+  int b = 10;
+  Console.WriteLine(a & b); // 1100 & 1010 = 1000
+  Console.WriteLine(a | b); // 1100 | 1010 = 1110
+  Console.WriteLine(a ^ b); // 1100 ^ 1010 = 0110
+  
+  // a logical && operator is smart. it does something called "short circuiting behavior" meaning that it stops if the left is false because "false && anything" is false
+  // a bitwise & operator is not smart in that way meaning it will evaluate both sides even if the left evaluates to false 
+}
+
+struct Point { public int X; public int Y; } // used in part c
+
+class ScopeDemo
+{
+  private int myField = 5;
+
+  public void MethodA() // field scope example
+  {
+    Console.WriteLine(myField);
+  }
+
+  public void MethodB() // field scope example
+  {
+    Console.WriteLine(myField);
+  }
+
+  public void MethodC() // method/local scope example
+  {
+    int localVar = 20;
+    Console.WriteLine(localVar);
+  }
+
+  public void MethodD() // block scope example
+  {
+    for(int i = 0 ; i < 5; i++)
+    {
+      int num = 10;
+    }
+
+    // Console.WriteLine(i); // attempting to use i or num here causes a compile error because they're block scoped and are destroyed as soon as the loop ends
+  }
+}
