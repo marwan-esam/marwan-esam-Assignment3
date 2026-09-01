@@ -206,6 +206,8 @@ void RunBitWiseOperators()
   // a logical && operator is smart. it does something called "short circuiting behavior" meaning that it stops if the left is false because "false && anything" is false
   // a bitwise & operator is not smart in that way meaning it will evaluate both sides even if the left evaluates to false 
 }
+Console.WriteLine("\n=== PART E: Stack vs Heap Digram ===");
+Console.WriteLine("Created STACK_HEAP.md file");
 
 struct Point { public int X; public int Y; } // used in part c
 
