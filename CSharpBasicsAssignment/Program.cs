@@ -234,6 +234,9 @@ int FindSingleNumber(int[] nums)
   */
 }
 
+Console.WriteLine("\n=== PART G: Short Answer ===");
+Console.WriteLine("Created ANSWER.md file");
+
 struct Point { public int X; public int Y; } // used in part c
 
 class ScopeDemo
